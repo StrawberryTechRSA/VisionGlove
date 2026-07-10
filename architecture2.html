@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VisionGlove - System Architecture</title>
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --panel-bg: #161b22;
+            --border-color: #30363d;
+            --text-main: #c9d1d9;
+            --text-muted: #8b949e;
+            --accent-glow: #58a6ff;
+            --accent-warn: #f0883e;
+            --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            font-family: var(--font-stack);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: #ffffff;
+            font-size: 2.2rem;
+            margin: 0 0 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h1::before {
+            content: "👁️‍🗨️";
+            font-size: 1.8rem;
+        }
+
+        h2 {
+            color: #ffffff;
+            font-size: 1.5rem;
+            margin-top: 35px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        p {
+            color: var(--text-main);
+        }
+
+        /* Repository Tree Layout */
+        .tree-container {
+            background-color: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 20px;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        .tree-line {
+            display: block;
+            white-space: pre;
+            color: var(--text-main);
+        }
+
+        .tree-comment {
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        /* Grid System for Layers */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .card {
+            background-color: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 20px;
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: var(--accent-glow);
+        }
+
+        ul {
+            padding-left: 20px;
+            margin: 10px 0 0 0;
+        }
+
+        li {
+            margin-bottom: 6px;
+        }
+
+        .badge {
+            background-color: rgba(88, 166, 255, 0.1);
+            color: var(--accent-glow);
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border: 1px solid rgba(88, 166, 255, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>VisionGlove System Architecture</h1>
+        <p class="subtitle">Cybernetic Edge-AI & Full-Stack Infrastructure Map</p>
+    </header>
+
+    <section>
+        <h2>Project Directory Structure</h2>
+        <p>The standard file mapping and distribution layout for the VisionGlove repository ecosystem:</p>
+        
+        <div class="tree-container">
+<span class="tree-line">vision-glove/</span>
+<span class="tree-line">├── <strong style="color: #ff7f0e;">backend/</strong></span>
+<span class="tree-line">│   ├── src/</span>
+<span class="tree-line">│   │   ├── api/          <span class="tree-comment"># REST/GraphQL communication endpoints</span></span>
+<span class="tree-line">│   │   ├── services/     <span class="tree-comment"># Core business logic & AI orchestration</span></span>
+<span class="tree-line">│   │   ├── models/       <span class="tree-comment"># DB schemas and shared entity contracts</span></span>
+<span class="tree-line">│   │   └── utils/        <span class="tree-comment"># Reusable functional helpers</span></span>
+<span class="tree-line">│   ├── tests/            <span class="tree-comment"># System unit and integration testing pipelines</span></span>
+<span class="tree-line">│   └── Dockerfile        <span class="tree-comment"># Containerized backend runtime environment</span></span>
+<span class="tree-line">├── <strong style="color: #2ca02c;">frontend/</strong></span>
+<span class="tree-line">│   ├── src/</span>
+<span class="tree-line">│   │   ├── components/   <span class="tree-comment"># Reusable modular UI elements</span></span>
+<span class="tree-line">│   │   ├── pages/        <span class="tree-comment"># Interface views and dashboard layouts</span></span>
+<span class="tree-line">│   │   ├── stores/       <span class="tree-comment"># Application client state management</span></span>
+<span class="tree-line">│   │   ├── hooks/        <span class="tree-comment"># Custom functional React abstractions</span></span>
+<span class="tree-line">│   │   └── types/        <span class="tree-comment"># UI telemetry type declarations</span></span>
+<span class="tree-line">│   ├── public/           <span class="tree-comment"># Static web assets</span></span>
+<span class="tree-line">│   └── Dockerfile        <span class="tree-comment"># Containerized frontend runtime environment</span></span>
+<span class="tree-line">├── <strong>contracts/</strong>            <span class="tree-comment"># Strict interface schemas linking firmware to API</span></span>
+<span class="tree-line">├── <strong style="color: #9467bd;">infra/</strong></span>
+<span class="tree-line">│   ├── ci-cd/            <span class="tree-comment"># GitHub Actions automated build & deployment workflows</span></span>
+<span class="tree-line">│   ├── terraform/        <span class="tree-comment"># Infrastructure-as-Code modules for secure cloud scaling</span></span>
+<span class="tree-line">│   └── README.md         <span class="tree-comment"># DevOps deployment guidelines</span></span>
+<span class="tree-line">├── ARCHITECTURE.md       <span class="tree-comment"># Structural deep dive file</span></span>
+<span class="tree-line">└── README.md             <span class="tree-comment"># High-level project blueprint</span></span>
+        </div>
+    </section>
+
+    <section>
+        <h2>Functional Ecosystem Subsystems</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Edge & Telemetry Layer <span class="badge">Hardware / C++</span></h3>
+                <p>Manages real-time data ingestion from the gloves physical sensor arrays.</p>
+                <ul>
+                    <li><strong>Sensors:</strong> Flex sensors, IMUs, environmental sensors.</li>
+                    <li><strong>Firmware:</strong> Local low-latency event processing loop.</li>
+                    <li><strong>Egress:</strong> Secure hardware packet communication to API backend.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Intelligence Engine <span class="badge">Python / TensorFlow</span></h3>
+                <p>Processes complex perceptual environments and raw incoming metrics.</p>
+                <ul>
+                    <li><strong>Computer Vision:</strong> Multi-spectral video analysis via OpenCV.</li>
+                    <li><strong>Gesture Logic:</strong> Movement tracking and action-prediction maps.</li>
+                    <li><strong>Deterrents:</strong> Ethical, calculated response mechanisms based on threat assessment.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Infrastructure Layer <span class="badge">Docker / Terraform</span></h3>
+                <p>Guarantees safe runtime environments and isolated execution scopes.</p>
+                <ul>
+                    <li><strong>Isolations:</strong> Multi-stage containerized build files.</li>
+                    <li><strong>Deployment:</strong> Automated checking and deployment via CI/CD.</li>
+                    <li><strong>Security:</strong> Encrypted data state structures for telemetry records.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>Command Dashboard <span class="badge">React / REST</span></h3>
+                <p>Provides operators with complete situational awareness and hardware monitoring capabilities.</p>
+                <ul>
+                    <li><strong>Telemetry:</strong> Live stream graphing for glove orientation and sensor loads.</li>
+                    <li><strong>Controls:</strong> Secure configurations override switches for deployment hardware.</li>
+                    <li><strong>Audit:</strong> Incident logs and physical location history tracking.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+</div>
+
+</body>
+</html>
